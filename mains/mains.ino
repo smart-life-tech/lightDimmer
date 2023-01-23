@@ -1,24 +1,3 @@
-/*
-  Author: GulJanjua
-  Date  : November 11, 2022
-
-  Software Requirements:
-  ----------------------
-  -Arduino IDE
-  #include "HX711.h"
-  #include <RBDdimmer.h>
-  #include <EEPROM.h>
-
-  Hardware Requirements:
-  ----------------------
-  -Arduino
-  -Dimmer
-  -Buttons
-
-  Project Requirents:
-  -------------------
-  • Filling bag machine
-*/
 
 #include "HX711.h"
 #include "RBDdimmer.h"
