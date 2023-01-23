@@ -1,4 +1,4 @@
 {
     "board": "arduino:avr:uno",
-    "sketch": "serialTest.ino"
+    "sketch": "mains\\mains.ino"
 }
