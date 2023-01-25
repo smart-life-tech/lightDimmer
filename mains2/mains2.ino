@@ -199,7 +199,7 @@ void readInterface()
       timeOpenBag = bucket1;
       Serial.println("speedDribble1: " + String(speedDribble) + " SpeedBulk: " + String(speedBulk) + " pauseTime: " + String(pauseTime) + " timeOpenBag: " + String(timeOpenBag));
     }
-    else if (data.indexOf("16oz") > -1)
+     if (data.indexOf("16oz") > -1)
     {
       bagSize = 2;
       weightOption = 16;
@@ -213,7 +213,7 @@ void readInterface()
       timeOpenBag = bucket2;
       Serial.println("Cut off: " + String(weightCut) + " Target: " + String(weightTar));
     }
-    else if (data.indexOf("32oz") > -1)
+     if (data.indexOf("32oz") > -1)
     {
       bagSize = 3;
       weightOption = 32;
@@ -227,7 +227,7 @@ void readInterface()
       timeOpenBag = bucket3;
       Serial.println("Cut off: " + String(weightCut) + " Target: " + String(weightTar));
     }
-    else if (data.indexOf("96oz") > -1)
+     if (data.indexOf("96oz") > -1)
     {
       bagSize = 4;
       weightOption = 96;
