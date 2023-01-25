@@ -107,6 +107,7 @@ void readInterface()
   if (ESP_Serial.available())
   {
     String data = ESP_Serial.readStringUntil('\n');
+    Serial.print("new data received : ");
     Serial.println(data);
     if (data.indexOf("data") > -1)
     {
@@ -184,7 +185,7 @@ void readInterface()
       temp.remove(0, temp.indexOf(",") + 1);
       bucket4 = temp.substring(0, temp.indexOf(",")).toInt();
     }
-    else if (data.indexOf("12oz") > -1)
+     if (data.indexOf("12oz") > -1)
     {
       bagSize = 1;
       weightOption = 12;
@@ -196,7 +197,7 @@ void readInterface()
       speedBulk = speedBulk1;
       pauseTime = pause1;
       timeOpenBag = bucket1;
-      Serial.println("soeedDribble1: " + String(speedDribble) + " SpeedBulk: " + String(speedBulk) + " pauseTime: " + String(pauseTime) + " timeOpenBag: " + String(timeOpenBag));
+      Serial.println("speedDribble1: " + String(speedDribble) + " SpeedBulk: " + String(speedBulk) + " pauseTime: " + String(pauseTime) + " timeOpenBag: " + String(timeOpenBag));
     }
     else if (data.indexOf("16oz") > -1)
     {
