@@ -300,12 +300,12 @@ void controlOutput()
     Serial.println(String(weightProgress) + " " + String(weightCut) + " " + String(weightTar));
     if (weightProgress < weightCut)
     {
-      powerValue = speedBulk;
+      powerValue = speedDribble;
       colorV = "W";
     }
     else if (weightProgress >= weightCut && weightProgress < weightTar)
     {
-      powerValue = speedDribble;
+      powerValue = speedBulk;
       colorV = "W";
     }
     else if (weightProgress > weightTar)
