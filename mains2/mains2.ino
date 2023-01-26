@@ -347,10 +347,12 @@ void readWeight()
 
 void controlFeeder(int power)
 {
+  if (power >= 100)
+    power = 100;
   for (int i = 0; i <= power; i++)
   {
     dimmer.set(i);
-    delay(300);
+    delay(100);
   }
 }
 
