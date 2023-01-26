@@ -185,7 +185,7 @@ void readInterface()
       temp.remove(0, temp.indexOf(",") + 1);
       bucket4 = temp.substring(0, temp.indexOf(",")).toInt();
     }
-     if (data.indexOf("12oz") > -1)
+    if (data.indexOf("12oz") > -1)
     {
       bagSize = 1;
       weightOption = 12;
@@ -199,7 +199,7 @@ void readInterface()
       timeOpenBag = bucket1;
       Serial.println("speedDribble1: " + String(speedDribble) + " SpeedBulk: " + String(speedBulk) + " pauseTime: " + String(pauseTime) + " timeOpenBag: " + String(timeOpenBag));
     }
-     if (data.indexOf("16oz") > -1)
+    if (data.indexOf("16oz") > -1)
     {
       bagSize = 2;
       weightOption = 16;
@@ -213,7 +213,7 @@ void readInterface()
       timeOpenBag = bucket2;
       Serial.println("Cut off: " + String(weightCut) + " Target: " + String(weightTar));
     }
-     if (data.indexOf("32oz") > -1)
+    if (data.indexOf("32oz") > -1)
     {
       bagSize = 3;
       weightOption = 32;
@@ -227,7 +227,7 @@ void readInterface()
       timeOpenBag = bucket3;
       Serial.println("Cut off: " + String(weightCut) + " Target: " + String(weightTar));
     }
-     if (data.indexOf("96oz") > -1)
+    if (data.indexOf("96oz") > -1)
     {
       bagSize = 4;
       weightOption = 96;
@@ -347,7 +347,11 @@ void readWeight()
 
 void controlFeeder(int power)
 {
-  dimmer.set(power);
+  for (int i = 0; i <= power; i++)
+  {
+    dimmer.set(i);
+    delay(300);
+  }
 }
 
 void controlInput()
