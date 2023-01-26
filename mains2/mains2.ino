@@ -352,7 +352,7 @@ void controlFeeder(int power)
   for (int i = 0; i <= power; i++)
   {
     dimmer.set(i);
-    delay(100);
+   // delay(100);
   }
 }
 
