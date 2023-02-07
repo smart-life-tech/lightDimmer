@@ -353,7 +353,11 @@ void controlFeeder(int power)
   {
     dimmer.set(i);
     delay(50);
+    Serial.print(i);
+    Serial.print(" ");
   }
+  Serial.println("power value set to : ");
+  Serial.println(power);
 }
 
 void controlInput()
@@ -366,6 +370,8 @@ void controlInput()
     digitalWrite(solenoidPin, LOW);
     delay(timeOpenBag);
     cycleBag[bagSize - 1] += 1;
+    Serial.print("the control input speed bulk in use ");
+    Serial.println(speedBulk);
     dimmer.set(speedBulk);
     stateFeeder = 1;
     delay(pauseTime);
