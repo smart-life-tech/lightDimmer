@@ -72,7 +72,7 @@ String colorV = "W";
 int speedDribble = 10, speedBulk = 40;
 int accept = 0;
 int pauseTime = 1000;
-
+int oldPower=50;
 void setup()
 {
   initSerial();
@@ -347,17 +347,21 @@ void readWeight()
 
 void controlFeeder(int power)
 {
-  if (power >= 100)
-    power = 100;
-  for (int i = 0; i <= power; i++)
+  if (oldPower != power)
   {
-    dimmer.set(i);
-    delay(50);
-    Serial.print(i);
-    Serial.print(" ");
+    oldPower = power;
+    if (power >= 100)
+      power = 100;
+    for (int i = 0; i <= power; i++)
+    {
+      dimmer.set(i);
+      delay(20);
+      Serial.print(i);
+      Serial.print(" ");
+    }
+    Serial.println("power value set to : ");
+    Serial.println(power);
   }
-  Serial.println("power value set to : ");
-  Serial.println(power);
 }
 
 void controlInput()
