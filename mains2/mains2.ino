@@ -21,11 +21,15 @@
 */
 
 #include "HX711.h"
-#include "Dimmer.h"
+#include "RBDdimmer.h"
 #include <EEPROM.h>
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
+#include "BluetoothSerial.h"
 
-SoftwareSerial ESP_Serial(10, 11);
+BluetoothSerial ESP_BT;
+unsigned long timer;
+
+//SoftwareSerial ESP_Serial(10, 11);
 
 #define CLK 8
 #define DOUT 9
@@ -37,8 +41,8 @@ SoftwareSerial ESP_Serial(10, 11);
 #define testLedPin 13
 
 HX711 scale;
-Dimmer dimmer(3, DIMMER_COUNT);
-
+// Dimmer dimmer(3, DIMMER_COUNT);
+dimmerLamp dimmer(3, zeroCrossPin);
 int MIN_POWER = 0;
 int MAX_POWER = 100;
 
@@ -72,7 +76,7 @@ String colorV = "W";
 int speedDribble = 10, speedBulk = 40;
 int accept = 0;
 int pauseTime = 1000;
-int oldPower=50;
+int oldPower = 50;
 void setup()
 {
   initSerial();
@@ -96,17 +100,18 @@ void sendData()
   if (millis() - timeSendData > 2000)
   {
     String data = String(weightProgress) + "," + String(hoursOperation) + "," + String(cycleBag[0]) + "," + String(cycleBag[1]) + "," + String(cycleBag[2]) + "," + String(cycleBag[3]) + "," + colorV;
-    // Serial.println(String(weightProgress));
-    ESP_Serial.println(data);
+     Serial.println(String(weightProgress));
+   // ESP_Serial.println(data);
     timeSendData = millis();
   }
 }
 
 void readInterface()
 {
-  if (ESP_Serial.available())
+  if (ESP_BT.available())
   {
-    String data = ESP_Serial.readStringUntil('\n');
+    String data = ESP_BT.readStringUntil('\n');
+   // String data="";ESP_BT
     Serial.print("new data received : ");
     Serial.println(data);
     if (data.indexOf("data") > -1)
@@ -247,7 +252,7 @@ void readInterface()
       powerValue = 0;
       for (int i = 0; i < 10; i++)
       {
-        dimmer.set(powerValue);
+        dimmer.setPower(powerValue);
         powerValue += 10;
         delay(20);
       }
@@ -354,7 +359,7 @@ void controlFeeder(int power)
       power = 100;
     for (int i = 0; i <= power; i++)
     {
-      dimmer.set(i);
+      dimmer.setPower(i);
       delay(20);
       Serial.print(i);
       Serial.print(" ");
@@ -376,7 +381,7 @@ void controlInput()
     cycleBag[bagSize - 1] += 1;
     Serial.print("the control input speed bulk in use ");
     Serial.println(speedBulk);
-    dimmer.set(speedBulk);
+    dimmer.setPower(speedBulk);
     stateFeeder = 1;
     delay(pauseTime);
   }
@@ -411,7 +416,8 @@ void initScale()
 
 void initFeeder()
 {
-  dimmer.begin();
+  // dimmer.begin();
+  dimmer.begin(NORMAL_MODE, ON);
 }
 
 void readMemory()
@@ -426,5 +432,7 @@ void readMemory()
 void initSerial()
 {
   Serial.begin(9600);
-  ESP_Serial.begin(9600);
+  ESP_BT.begin("AutoFill");
+  randomSeed(34);
+ // ESP_Serial.begin(9600);
 }
