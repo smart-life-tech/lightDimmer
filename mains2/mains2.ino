@@ -32,13 +32,13 @@ unsigned long timer;
 
 //SoftwareSerial ESP_Serial(10, 11);
 
-#define CLK 8
-#define DOUT 9
-#define zeroCrossPin 2
-#define pwmPin 3
-#define solenoidPin 7
-#define footSwPin 5
-#define handSwPin 6
+#define CLK 23
+#define DOUT 22
+#define zeroCrossPin 18
+#define pwmPin 5
+#define solenoidPin 4
+#define footSwPin 19
+#define handSwPin 21
 #define testLedPin 13
 
 HX711 scale;
