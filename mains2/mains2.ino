@@ -43,7 +43,7 @@ unsigned long timer;
 
 HX711 scale;
 // Dimmer dimmer(3, DIMMER_COUNT);
-dimmerLamp dimmer(3, zeroCrossPin);
+dimmerLamp dimmer(pwmPin, zeroCrossPin);
 int MIN_POWER = 0;
 int MAX_POWER = 100;
 
