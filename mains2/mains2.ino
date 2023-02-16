@@ -81,19 +81,19 @@ int oldPower = 50;
 void setup()
 {
   initSerial();
-  //initHardware();
- // initScale();
- // initFeeder();
- // readMemory();
+  initHardware();
+  initScale();
+  initFeeder();
+  readMemory();
 }
 
 void loop()
 {
   readInterface();
-  //controlInput();
-  //readWeight();
-  //controlOutput();
-  //sendData();
+  controlInput();
+  readWeight();
+  controlOutput();
+  sendData();
 }
 
 void sendData()
