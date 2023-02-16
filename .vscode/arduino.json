@@ -1,6 +1,6 @@
 {
     "board": "esp32:esp32:esp32",
-    "sketch": "serialTest.ino",
+    "sketch": "mains2\\mains2.ino",
     "configuration": "PSRAM=disabled,PartitionScheme=default,CPUFreq=240,FlashMode=qio,FlashFreq=80,FlashSize=4M,UploadSpeed=921600,LoopCore=1,EventsCore=1,DebugLevel=none,EraseFlash=none",
     "port": "COM4",
     "programmer": "esp32:esptool"
