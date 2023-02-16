@@ -111,12 +111,13 @@ void readInterface()
 {
   if (ESP_BT.available())
   {
-    Serial.print("new data received ee: ");
-    Serial.write(ESP_BT.read());
+    // Serial.print("new data received ee: ");
+    // Serial.write(ESP_BT.read());
     String data = ESP_BT.readStringUntil('\n');
     // String data="";ESP_BT
-    Serial.print("new data received : ");
+    Serial.println("new data received : ");
     Serial.println(data);
+    //delay(6000);
     if (data.indexOf("data") > -1)
     {
       String temp = data;
@@ -331,14 +332,15 @@ void controlOutput()
         accept = 0;
       }
     }
+    Serial.print("power value in use : ");
+    Serial.println(powerValue);
   }
   if (millis() - timeOperation > 3600000 && stateFeeder > 0)
   {
     hoursOperation++;
     timeOperation = millis();
   }
-  Serial.print("power value in use : ");
-  Serial.println(powerValue);
+
   controlFeeder(powerValue);
 }
 
