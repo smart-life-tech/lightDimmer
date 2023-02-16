@@ -24,13 +24,13 @@
 #include "HX711.h"
 #include "RBDdimmer.h"
 #include <EEPROM.h>
-//#include <SoftwareSerial.h>
+// #include <SoftwareSerial.h>
 #include "BluetoothSerial.h"
 
 BluetoothSerial ESP_BT;
 unsigned long timer;
 
-//SoftwareSerial ESP_Serial(10, 11);
+// SoftwareSerial ESP_Serial(10, 11);
 
 #define CLK 23
 #define DOUT 22
@@ -81,19 +81,19 @@ int oldPower = 50;
 void setup()
 {
   initSerial();
-  initHardware();
-  initScale();
-  initFeeder();
-  readMemory();
+  //initHardware();
+ // initScale();
+ // initFeeder();
+ // readMemory();
 }
 
 void loop()
 {
   readInterface();
-  controlInput();
-  readWeight();
-  controlOutput();
-  sendData();
+  //controlInput();
+  //readWeight();
+  //controlOutput();
+  //sendData();
 }
 
 void sendData()
@@ -101,8 +101,8 @@ void sendData()
   if (millis() - timeSendData > 2000)
   {
     String data = String(weightProgress) + "," + String(hoursOperation) + "," + String(cycleBag[0]) + "," + String(cycleBag[1]) + "," + String(cycleBag[2]) + "," + String(cycleBag[3]) + "," + colorV;
-     Serial.println(String(weightProgress));
-   // ESP_Serial.println(data);
+    Serial.println(String(weightProgress));
+    // ESP_Serial.println(data);
     timeSendData = millis();
   }
 }
@@ -111,8 +111,10 @@ void readInterface()
 {
   if (ESP_BT.available())
   {
+    Serial.print("new data received ee: ");
+    Serial.write(ESP_BT.read());
     String data = ESP_BT.readStringUntil('\n');
-   // String data="";ESP_BT
+    // String data="";ESP_BT
     Serial.print("new data received : ");
     Serial.println(data);
     if (data.indexOf("data") > -1)
@@ -434,6 +436,7 @@ void initSerial()
 {
   Serial.begin(9600);
   ESP_BT.begin("AutoFill");
+  Serial.println("serial and bt ready 9600");
   randomSeed(34);
- // ESP_Serial.begin(9600);
+  // ESP_Serial.begin(9600);
 }
