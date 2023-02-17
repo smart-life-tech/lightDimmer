@@ -193,6 +193,9 @@ void readInterface()
       pause4 = temp.substring(0, temp.indexOf(",")).toInt();
       temp.remove(0, temp.indexOf(",") + 1);
       bucket4 = temp.substring(0, temp.indexOf(",")).toInt();
+      Serial.println("speedDribble1: " + String(speedDribble1) + " SpeedBulk1: " + String(speedBulk1) + " pauseTime1: " + String(pause1) + " timeOpenBag1: " + String(bucket1));
+      Serial.println("speedDribble2: " + String(speedDribble2) + " SpeedBulk2: " + String(speedBulk2) + " pauseTime2: " + String(pause2) + " timeOpenBag2: " + String(bucket2));
+      Serial.println("speedDribble3: " + String(speedDribble3) + " SpeedBulk3: " + String(speedBulk3) + " pauseTime3: " + String(pause3) + " timeOpenBag3: " + String(bucket3));
     }
     if (data.indexOf("12oz") > -1)
     {
@@ -250,7 +253,7 @@ void readInterface()
       timeOpenBag = bucket4;
       Serial.println("Cut off: " + String(weightCut) + " Target: " + String(weightTar));
     }
-    else if (data.indexOf("Start") > -1 && startA == 0)
+     if (data.indexOf("Start") > -1 && startA == 0)
     {
       stateFeeder = 1;
       powerValue = 0;
