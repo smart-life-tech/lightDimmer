@@ -117,7 +117,7 @@ void readInterface()
     // String data="";ESP_BT
     Serial.println("new data received : ");
     Serial.println(data);
-    //delay(6000);
+    // delay(6000);
     if (data.indexOf("data") > -1)
     {
       String temp = data;
@@ -361,7 +361,14 @@ void controlFeeder(int power)
   {
     oldPower = power;
     if (power >= 100)
+    {
       power = 100;
+    }
+    Serial.print("recived power: ");
+    Serial.println(power);
+    power = map(power, 0, 100, 50, 80);
+    Serial.print("mapped power: ");
+    Serial.println(power);
     for (int i = 0; i <= power; i++)
     {
       dimmer.setPower(i);
