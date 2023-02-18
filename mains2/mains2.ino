@@ -101,7 +101,7 @@ void sendData()
   if (millis() - timeSendData > 2000)
   {
     String data = String(weightProgress) + "," + String(hoursOperation) + "," + String(cycleBag[0]) + "," + String(cycleBag[1]) + "," + String(cycleBag[2]) + "," + String(cycleBag[3]) + "," + colorV;
-    Serial.println(String(weightProgress));
+    //Serial.println(String(weightProgress));
     // ESP_Serial.println(data);
     timeSendData = millis();
   }
