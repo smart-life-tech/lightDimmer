@@ -259,7 +259,7 @@ void readInterface()
       powerValue = 0;
       for (int i = 0; i < 10; i++)
       {
-        dimmer.setPower(powerValue);
+      //  dimmer.setPower(powerValue);
         powerValue += 10;
         delay(20);
       }
