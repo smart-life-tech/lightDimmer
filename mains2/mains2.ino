@@ -253,7 +253,7 @@ void readInterface()
       timeOpenBag = bucket4;
       Serial.println("Cut off: " + String(weightCut) + " Target: " + String(weightTar));
     }
-     if (data.indexOf("Start") > -1 && startA == 0)
+     if (data.indexOf("Start") > -1 /*&& startA == 0*/)
     {
       stateFeeder = 1;
       powerValue = 0;
