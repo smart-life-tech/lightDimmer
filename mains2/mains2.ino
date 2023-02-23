@@ -81,19 +81,19 @@ int oldPower = 50;
 void setup()
 {
   initSerial();
-  initHardware();
-  initScale();
-  initFeeder();
+ // initHardware();
+ // initScale();
+ // initFeeder();
   readMemory();
 }
 
 void loop()
 {
   readInterface();
-  controlInput();
-  readWeight();
-  controlOutput();
-  sendData();
+ // controlInput();
+  //readWeight();
+  //controlOutput();
+ // sendData();
 }
 
 void sendData()
@@ -112,7 +112,7 @@ void readInterface()
   if (ESP_BT.available())
   {
     // Serial.print("new data received ee: ");
-    // Serial.write(ESP_BT.read());
+    //Serial.write(ESP_BT.read());
     String data = ESP_BT.readStringUntil('\n');
     // String data="";ESP_BT
     Serial.println("new data received : ");
@@ -209,6 +209,7 @@ void readInterface()
       speedBulk = speedBulk1;
       pauseTime = pause1;
       timeOpenBag = bucket1;
+       Serial.println("Cut off: " + String(weightCut) + " Target: " + String(weightTar));
       Serial.println("speedDribble1: " + String(speedDribble) + " SpeedBulk: " + String(speedBulk) + " pauseTime: " + String(pauseTime) + " timeOpenBag: " + String(timeOpenBag));
     }
     if (data.indexOf("16oz") > -1)
@@ -448,7 +449,7 @@ void initSerial()
 {
   Serial.begin(9600);
   ESP_BT.begin("AutoFill");
-  Serial.println("serial and bt ready 9600");
+  Serial.println("serial and bt ready at 9600 baud ");
   randomSeed(34);
   // ESP_Serial.begin(9600);
 }
