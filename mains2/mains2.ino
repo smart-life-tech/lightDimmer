@@ -111,8 +111,8 @@ void readInterface()
 {
   if (ESP_BT.available())
   {
-    // Serial.print("new data received ee: ");
-    //Serial.write(ESP_BT.read());
+    Serial.print("new data received ee: ");
+    Serial.write(ESP_BT.read());
     String data = ESP_BT.readStringUntil('\n');
     // String data="";ESP_BT
     Serial.println("new data received : ");
