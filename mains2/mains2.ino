@@ -81,19 +81,19 @@ int oldPower = 50;
 void setup()
 {
   initSerial();
- // initHardware();
- // initScale();
- // initFeeder();
+  initHardware();
+  initScale();
+  initFeeder();
   readMemory();
 }
 
 void loop()
 {
   readInterface();
- // controlInput();
-  //readWeight();
-  //controlOutput();
- // sendData();
+  controlInput();
+  readWeight();
+  controlOutput();
+  sendData();
 }
 
 void sendData()
@@ -101,8 +101,8 @@ void sendData()
   if (millis() - timeSendData > 2000)
   {
     String data = String(weightProgress) + "," + String(hoursOperation) + "," + String(cycleBag[0]) + "," + String(cycleBag[1]) + "," + String(cycleBag[2]) + "," + String(cycleBag[3]) + "," + colorV;
-    //Serial.println(String(weightProgress));
-    // ESP_Serial.println(data);
+    // Serial.println(String(weightProgress));
+    //  ESP_Serial.println(data);
     timeSendData = millis();
   }
 }
@@ -111,8 +111,8 @@ void readInterface()
 {
   if (ESP_BT.available())
   {
-    Serial.print("new data received ee: ");
-    Serial.write(ESP_BT.read());
+    // Serial.print("new data received ee: ");
+    // Serial.write(ESP_BT.read());
     String data = ESP_BT.readStringUntil('\n');
     // String data="";ESP_BT
     Serial.println("new data received : ");
@@ -209,7 +209,7 @@ void readInterface()
       speedBulk = speedBulk1;
       pauseTime = pause1;
       timeOpenBag = bucket1;
-       Serial.println("Cut off: " + String(weightCut) + " Target: " + String(weightTar));
+      Serial.println("Cut off: " + String(weightCut) + " Target: " + String(weightTar));
       Serial.println("speedDribble1: " + String(speedDribble) + " SpeedBulk: " + String(speedBulk) + " pauseTime: " + String(pauseTime) + " timeOpenBag: " + String(timeOpenBag));
     }
     if (data.indexOf("16oz") > -1)
@@ -254,13 +254,13 @@ void readInterface()
       timeOpenBag = bucket4;
       Serial.println("Cut off: " + String(weightCut) + " Target: " + String(weightTar));
     }
-     if (data.indexOf("Start") > -1 /*&& startA == 0*/)
+    if (data.indexOf("Start") > -1 /*&& startA == 0*/)
     {
       stateFeeder = 1;
       powerValue = 0;
       for (int i = 0; i < 10; i++)
       {
-      //  dimmer.setPower(powerValue);
+        //  dimmer.setPower(powerValue);
         powerValue += 10;
         delay(20);
       }
