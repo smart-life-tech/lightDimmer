@@ -102,7 +102,7 @@ void sendData()
   {
     String data = String(weightProgress) + "," + String(hoursOperation) + "," + String(cycleBag[0]) + "," + String(cycleBag[1]) + "," + String(cycleBag[2]) + "," + String(cycleBag[3]) + "," + colorV;
     // Serial.println(String(weightProgress));
-    //  ESP_Serial.println(data);
+     //ESP_BT.println(data);
     timeSendData = millis();
   }
 }
@@ -291,7 +291,7 @@ void readInterface()
       EEPROM.put(60, cycleBag[2]);
       EEPROM.put(80, cycleBag[3]);
     }
-    else if (data.indexOf("Empty") > -1)
+    else if (data.indexOf("empty") > -1)
     {
       Serial.println(timeOpenBag);
       digitalWrite(solenoidPin, HIGH);
@@ -326,6 +326,7 @@ void controlOutput()
     {
       powerValue = 0;
       stateFeeder = 2;
+      accept = 0;
       if (weightProgress < weightUnd || weightProgress > weightOve)
       {
         colorV = "R";
@@ -374,6 +375,9 @@ void controlFeeder(int power)
     power = map(power, 0, 100, 50, 80);
     Serial.print("mapped power: ");
     Serial.println(power);
+    if (power<52){
+      power=0;
+    }
     for (int i = 0; i <= power; i++)
     {
       dimmer.setPower(i);
@@ -388,7 +392,7 @@ void controlFeeder(int power)
 
 void controlInput()
 {
-  if ((digitalRead(footSwPin) == LOW || digitalRead(handSwPin) == LOW) && p1 == 0 && stateFeeder == 2 && accept == 0)
+  if ((digitalRead(footSwPin) == LOW || digitalRead(handSwPin) == LOW) /*&& p1 == 0 && stateFeeder == 2 && accept == 0*/)
   {
     p1 = 1;
     digitalWrite(solenoidPin, HIGH);
