@@ -316,15 +316,18 @@ void controlOutput()
     {
       powerValue = speedDribble;
       colorV = "W";
+      Serial.println("speed dribble in use");
     }
     else if (weightProgress >= weightCut && weightProgress < weightTar)
     {
       powerValue = speedBulk;
+       Serial.println("speed bulk in use");
       colorV = "W";
     }
     else if (weightProgress > weightTar)
     {
       powerValue = 0;
+       Serial.println("power value = 0, speed =0");
       stateFeeder = 2;
       accept = 0;
       if (weightProgress < weightUnd || weightProgress > weightOve)
@@ -372,12 +375,14 @@ void controlFeeder(int power)
     }
     Serial.print("recived power: ");
     Serial.println(power);
+     if (power<5){
+      power=0;
+    }else{
     power = map(power, 0, 100, 50, 80);
     Serial.print("mapped power: ");
-    Serial.println(power);
-    if (power<52){
-      power=0;
     }
+    Serial.println(power);
+   
     for (int i = 0; i <= power; i++)
     {
       dimmer.setPower(i);
