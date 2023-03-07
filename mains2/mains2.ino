@@ -397,7 +397,7 @@ void controlFeeder(int power)
 
 void controlInput()
 {
-  if ((digitalRead(footSwPin) == LOW || digitalRead(handSwPin) == LOW) /*&& p1 == 0 && stateFeeder == 2 && accept == 0*/)
+  if ((digitalRead(footSwPin) == LOW || digitalRead(handSwPin) == LOW) && p1 == 0 && stateFeeder == 2 /*&& accept == 0*/)
   {
     p1 = 1;
     digitalWrite(solenoidPin, HIGH);
