@@ -102,7 +102,7 @@ void sendData()
   {
     String data = String(weightProgress) + "," + String(hoursOperation) + "," + String(cycleBag[0]) + "," + String(cycleBag[1]) + "," + String(cycleBag[2]) + "," + String(cycleBag[3]) + "," + colorV;
     // Serial.println(String(weightProgress));
-     //ESP_BT.println(data);
+    // ESP_BT.println(data);
     timeSendData = millis();
   }
 }
@@ -321,22 +321,26 @@ void controlOutput()
     else if (weightProgress >= weightCut && weightProgress < weightTar)
     {
       powerValue = speedBulk;
-       Serial.println("speed bulk in use");
+      Serial.println("speed bulk in use");
       colorV = "W";
     }
     else if (weightProgress > weightTar)
     {
       powerValue = 0;
-       Serial.println("power value = 0, speed =0");
+      Serial.println("power value = 0, speed =0");
       stateFeeder = 2;
       accept = 0;
-      if (weightProgress < weightUnd || weightProgress > weightOve)
+      if (weightProgress >= weightUnd && weightProgress <= weightOve)
       {
+        Serial.print("more than target, less than over weight");
+        Serial.println(String(weightProgress) + " " + String(weightUnd) + " " + String(weightOve));
         colorV = "R";
         accept = 1;
       }
       else
       {
+        Serial.print("more than target, over weight");
+        Serial.println(String(weightProgress) + " " + String(weightUnd) + " " + String(weightOve));
         colorV = "G";
         accept = 0;
       }
@@ -375,14 +379,17 @@ void controlFeeder(int power)
     }
     Serial.print("recived power: ");
     Serial.println(power);
-     if (power<5){
-      power=0;
-    }else{
-    power = map(power, 0, 100, 50, 80);
-    Serial.print("mapped power: ");
+    if (power < 5)
+    {
+      power = 0;
+    }
+    else
+    {
+      power = map(power, 0, 100, 50, 80);
+      Serial.print("mapped power: ");
     }
     Serial.println(power);
-   
+
     for (int i = 0; i <= power; i++)
     {
       dimmer.setPower(i);
@@ -396,8 +403,8 @@ void controlFeeder(int power)
 }
 
 void controlInput()
-{
-  if ((digitalRead(footSwPin) == LOW || digitalRead(handSwPin) == LOW) && p1 == 0 && stateFeeder == 2 /*&& accept == 0*/)
+{// foot swicth only operate when the weigt is between over and under
+  if ((digitalRead(footSwPin) == LOW || digitalRead(handSwPin) == LOW) && p1 == 0 && stateFeeder == 2 && accept == 1)
   {
     p1 = 1;
     digitalWrite(solenoidPin, HIGH);
