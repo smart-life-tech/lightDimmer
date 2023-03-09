@@ -92,7 +92,7 @@ void loop()
   readInterface();
   controlInput();
   readWeight();
-  controlOutput();
+  // controlOutput();
   sendData();
 }
 
@@ -403,7 +403,7 @@ void controlFeeder(int power)
 }
 
 void controlInput()
-{// foot swicth only operate when the weigt is between over and under
+{ // foot swicth only operate when the weigt is between over and under
   if ((digitalRead(footSwPin) == LOW || digitalRead(handSwPin) == LOW) && p1 == 0 && stateFeeder == 2 && accept == 1)
   {
     p1 = 1;
