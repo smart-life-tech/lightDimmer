@@ -85,6 +85,10 @@ void setup()
   initScale();
   initFeeder();
   readMemory();
+  Serial.println("reset the power value");
+  delay(500);
+  dimmer.setPower(0);
+  delay(500);
 }
 
 void loop()
@@ -92,7 +96,7 @@ void loop()
   readInterface();
   controlInput();
   readWeight();
-  // controlOutput();
+  controlOutput();
   sendData();
 }
 
